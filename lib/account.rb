@@ -25,8 +25,8 @@ class Account
   end
 
   def print
-    "date || credit || debit || balance"
-    @log.log.each { |x| x }
+    puts "date || credit || debit || balance"
+    @log.log.each { |x| puts x }
   end
 
 end

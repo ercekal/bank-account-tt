@@ -26,8 +26,6 @@ attr_reader :log
   end
 
   def time
-    t = Time.now
-    t.strftime('%d/%m/%Y')
+    Time.now.strftime("%d/%m/%Y")
   end
-
 end
