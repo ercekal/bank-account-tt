@@ -29,7 +29,16 @@ describe 'deposit' do
   it 'should update the log class' do
     account = Account.new
     account.deposit(50)
-    expect(account.log).to include("50 || || 50")
+    expect(account.log.log).to include("18/10/2016 || 50 || || 50")
+  end
+end
+
+describe 'withdraw' do
+  it 'should update the log class' do
+    account = Account.new
+    account.deposit(50)
+    account.withdraw(10)
+    expect(account.log.log).to include("18/10/2016 || || 10 || 40")
   end
 end
 

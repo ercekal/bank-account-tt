@@ -1,12 +1,13 @@
 require_relative './log.rb'
+require_relative './transaction.rb'
 
 class Account
 
   attr_reader :balance, :log
 
-  def initialize
+  def initialize(log_class: Log)
     @balance = 0
-    @log = []
+    @log = Log.new
   end
 
   def deposit(number)
@@ -22,11 +23,16 @@ class Account
   private
 
   def record_deposit(number)
-    @log << number.to_s + " || || " + @balance.to_s
+    @log.log << time + " || " + number.to_s + " || || " + @balance.to_s
   end
 
   def record_withdraw(number)
-    @log << "|| || " + number.to_s + " || " + @balance.to_s
+    @log.log << time + " || || " + number.to_s + " || " + @balance.to_s
+  end
+
+  def time
+    t = Time.now
+    t.strftime('%d/%m/%Y')
   end
 
 end
