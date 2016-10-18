@@ -1,43 +1,35 @@
 require_relative './log.rb'
-require_relative './transaction.rb'
+require_relative './deposit.rb'
+require_relative './credit.rb'
 
 class Account
 
   attr_reader :balance, :log
 
-  def initialize
+  def initialize(log = Log.new)
     @balance = 0
-    @log = Log.new
+    @log = log
   end
 
   def deposit(number)
+    t = Deposit.new(number)
     @balance += number
-    record_deposit(number)
+    @log.add_deposit(number, @balance)
   end
 
   def withdraw(number)
-    @balance >= number ? @balance -= number : "You don't have enough funds"
-    record_withdraw(number)
+    if @balance >= number
+      c = Credit.new(number)
+      @balance -= number
+      @log.add_credit(number, @balance)
+    else
+    "You don't have enough funds"
+  end
   end
 
   def print
-    @log.log.unshift("date || credit || debit || balance")
-    @log.log.each { |x| x }
+    puts "date || credit || debit || balance"
+    @log.log.each { |x| puts x }
   end
 
-  private
-
-  def record_deposit(number)
-    @log.log << time + " || " + number.to_s + " || || " + @balance.to_s
-  end
-
-  def record_withdraw(number)
-    @log.log << time + " || || " + number.to_s + " || " + @balance.to_s
-  end
-
-  def time
-    t = Time.now
-    t.strftime('%d/%m/%Y')
-  end
-  
 end
