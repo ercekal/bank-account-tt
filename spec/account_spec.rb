@@ -42,8 +42,11 @@ describe 'withdraw' do
   end
 end
 
-# describe 'print' do
-#   it 'should print the details of the given account' do
-#
-#   end
-# end
+describe 'print' do
+  it 'should print the details of the given account' do
+    account = Account.new
+    account.deposit(50)
+    account.withdraw(10)
+    expect(account.print).to include("18/10/2016 || 50 || || 50", "18/10/2016 || || 10 || 40") 
+  end
+end

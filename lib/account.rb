@@ -16,8 +16,13 @@ class Account
   end
 
   def withdraw(number)
-    @balance -= number
+    @balance >= number ? @balance -= number : "You don't have enough funds"
     record_withdraw(number)
+  end
+
+  def print
+    @log.log.unshift("date || credit || debit || balance")
+    @log.log.each { |x| x }
   end
 
   private
