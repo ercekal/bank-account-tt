@@ -5,7 +5,7 @@ class Account
 
   attr_reader :balance, :log
 
-  def initialize(log_class: Log)
+  def initialize
     @balance = 0
     @log = Log.new
   end
@@ -39,5 +39,5 @@ class Account
     t = Time.now
     t.strftime('%d/%m/%Y')
   end
-
+  
 end

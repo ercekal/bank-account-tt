@@ -6,5 +6,4 @@ attr_reader :log
     @log = []
   end
 
-
 end
