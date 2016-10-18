@@ -7,15 +7,15 @@ attr_reader :log
 
   def initialize(transaction_class: Transaction)
     @transaction_class = transaction_class
-    @log = []
+    @log = ["date || credit || debit || balance"]
   end
 
-  def add_to_log(number, balance)
+  def add_to_log(date, number, balance)
     tr = @transaction_class.new(number)
     if tr.amount >= 0
-      add(time + " || " + tr.amount.to_s + " || || " + balance.to_s)
+      add(date.to_s + " || " + tr.amount.to_s + " || || " + balance.to_s)
     else
-      add(time + " || || " + (tr.amount.abs).to_s + " || " + balance.to_s)
+      add(date.to_s + " || || " + (tr.amount.abs).to_s + " || " + balance.to_s)
     end
   end
 
@@ -23,11 +23,6 @@ attr_reader :log
 
   def add(transaction)
     @log << transaction
-  end
-
-  def time
-    t = Time.now
-    t.strftime('%d/%m/%Y')
   end
 
 end
