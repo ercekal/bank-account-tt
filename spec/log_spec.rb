@@ -1,7 +1,6 @@
 require 'account'
 require 'log'
-require 'credit'
-require 'deposit'
+require 'transaction'
 
 describe Log do
 

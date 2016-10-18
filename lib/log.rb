@@ -1,25 +1,22 @@
-require_relative './deposit.rb'
-require_relative './credit.rb'
+require_relative './transaction.rb'
 require_relative './account.rb'
 
 class Log
 
 attr_reader :log
 
-  def initialize(deposit_class: Deposit, credit_class: Credit)
-    @deposit_class = deposit_class
-    @credit_class = credit_class
+  def initialize(transaction_class: Transaction)
+    @transaction_class = transaction_class
     @log = []
   end
 
-  def add_deposit(number, balance)
-    de = @deposit_class.new(number)
-    add(time + " || " + de.deposit.to_s + " || || " + balance.to_s)
-  end
-
-  def add_credit(number, balance)
-    cr = @credit_class.new(number)
-    add(time + " || || " + cr.credit.to_s + " || " + balance.to_s)
+  def add_to_log(number, balance)
+    tr = @transaction_class.new(number)
+    if tr.amount >= 0
+      add(time + " || " + tr.amount.to_s + " || || " + balance.to_s)
+    else
+      add(time + " || || " + (tr.amount.abs).to_s + " || " + balance.to_s)
+    end
   end
 
   private

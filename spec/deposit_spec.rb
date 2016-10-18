@@ -1,10 +1,10 @@
-require 'deposit'
+require 'transaction'
 
-describe Deposit do
+describe Transaction do
   describe 'initialize' do
     it 'has a balance of a given number' do
-      d = Deposit.new(30)
-      expect(d.deposit).to eq 30
+      d = Transaction.new(30)
+      expect(d.amount).to eq 30
     end
   end
 end
